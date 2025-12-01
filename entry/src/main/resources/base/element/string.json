@@ -1,0 +1,143 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "health_data_permission_reason",
+      "value": "Need health data permission to monitor heart rate"
+    },
+    {
+      "name": "call_permission_reason",
+      "value": "Need call permission for emergency calls"
+    },
+    {
+      "name": "contacts_permission_reason",
+      "value": "Need contacts permission to access emergency contacts"
+    },
+    {
+      "name": "no_select",
+      "value": "No contact selected"
+    },
+    {
+      "name": "heart_rate_monitor",
+      "value": "Heart Rate Monitor"
+    },
+    {
+      "name": "emergency_alert_system",
+      "value": "Wearable Emergency Alert System"
+    },
+    {
+      "name": "current_heart_rate",
+      "value": "Current Heart Rate"
+    },
+    {
+      "name": "heart_rate",
+      "value": "%d BPM"
+    },
+    {
+      "name": "status",
+      "value": "Status: %s"
+    },
+
+    {
+      "name": "phone",
+      "value": "Phone:"
+    },
+    {
+      "name": "em_name",
+      "value": "Name:"
+    },
+    {
+      "name": "emergency_contact",
+      "value": "Emergency Contact"
+    },
+    {
+      "name": "not_set",
+      "value": "Not Set"
+    },
+    {
+      "name": "monitoring",
+      "value": "Monitoring..."
+    }
+    ,
+    {
+      "name": "start_monitoring",
+      "value": "Start Monitoring"
+    },
+    {
+      "name": "stop_monitoring",
+      "value": "Stop Monitoring"
+    },
+    {
+      "name": "set_emergency_contact",
+      "value": "Set Emergency Contact"
+    },
+    {
+      "name": "test_emergency_call",
+      "value": "Test Emergency Call"
+    },
+    {
+      "name": "safety_information",
+      "value": "Safety Information"
+    },
+    {
+      "name": "monitoring_stopped",
+      "value": "Monitoring stopped"
+    },
+    {
+      "name": "desc_1",
+      "value": "• Emergency call will trigger if heart rate remains outside normal range (40-140 BPM) for 10 seconds"
+    },
+    {
+      "name": "desc_2",
+      "value": "• Make sure to set your emergency contact before starting monitoring"
+    },
+    {
+      "name": "desc_3",
+      "value": "• Keep the app running in foreground for continuous monitoring"
+    },
+    {
+      "name": "abnormal_status",
+      "value": "Abnormal heart rate detected"
+    }
+  ,
+    {
+      "name": "normal_status",
+      "value": "Normal"
+    },
+    {
+      "name": "contact_status",
+      "value": "No emergency contact set!"
+    },
+    {
+      "name": "status_emergency_call",
+      "value": "Making emergency call!"
+    },
+    {
+      "name": "status_emergency_call_started",
+      "value": "Emergency call initiated "
+    },
+    {
+      "name": "status_emergency_call_failed",
+      "value": "Failed to make emergency call"
+    },
+    {
+      "name": "status_emergency_call_failed_set_contact",
+      "value": "Failed to set contact"
+    },
+    {
+      "name": "status_no",
+      "value": "..."
+    }
+  ]
+}
