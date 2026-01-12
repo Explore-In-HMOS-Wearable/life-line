@@ -27,7 +27,7 @@
           "abilities": ["MainAbility"],
           "when": "always"
         }
-      },
+      }
     ],
     "abilities": [
       {
@@ -62,7 +62,7 @@
             "name": "ohos.extension.backup",
             "resource": "$profile:backup_config"
           }
-        ],
+        ]
       }
     ]
   }

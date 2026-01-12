@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.hmosdemos.lifeline",
+    "bundleName": "com.hmosdemos.wearable.lifeline",
     "vendor": "hmosdemos",
     "versionCode": 1000000,
     "versionName": "1.0.0",

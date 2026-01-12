@@ -15,39 +15,26 @@ export async function addContact(context: common.UIAbilityContext, fullName: str
     contact.addContact(context, contactInfo, async (err: BusinessError, data) => {
       if (err) {
         console.error('Adding Error:', err.code);
-        promptAction.showToast({
-          message: 'Adding Error: ' + err.code,
-          duration: 3000
-        });
         return;
       }
     })
   } catch (error) {
     console.error('Unexpected error in addContact:', error);
-    promptAction.showToast({
-      message: 'Unexpected error occurred while adding contact',
-      duration: 3000
-    });
   }
 }
 
 export async function deleteContact(context: common.UIAbilityContext, key: string) {
   try {
     contact.deleteContact(context, key);
-    promptAction.showToast({
-      message: 'Contact deleted successfully',
-      duration: 3000
-    });
+
   } catch (error) {
     console.error('Unexpected error in deleteContact:', error);
-    promptAction.showToast({
-      message: 'Unexpected error occurred while deleting contact',
-      duration: 3000
-    });
+
   }
 }
 
-export async function updateContact(context: common.UIAbilityContext, id: number, fullName: string, phoneNumber: string) {
+export async function updateContact(
+  context: common.UIAbilityContext, id: number, fullName: string, phoneNumber: string) {
   try {
     let newContactInfo: contact.Contact = {
       name: { fullName: fullName },
@@ -59,16 +46,10 @@ export async function updateContact(context: common.UIAbilityContext, id: number
     let predicates = new relationalStore.RdbPredicates('contacts');
     predicates.equalTo('id', id);
 
-    promptAction.showToast({
-      message: 'Contact updated successfully',
-      duration: 3000
-    });
+
   } catch (error) {
     console.error('Unexpected error in updateContact:', error);
-    promptAction.showToast({
-      message: 'Unexpected error occurred while updating contact',
-      duration: 3000
-    });
+
   }
 }
 
@@ -107,10 +88,6 @@ export async function getContacts(context: common.UIAbilityContext): Promise<Con
       })
     } catch (error) {
       console.error('Unexpected error in getContacts:', error);
-      promptAction.showToast({
-        message: 'Error: ' + (error as BusinessError).code,
-        duration: 3000
-      });
       reject(error);
     }
   })

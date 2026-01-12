@@ -5,6 +5,7 @@ import { sensor } from '@kit.SensorServiceKit';
 import { BusinessError } from '@ohos.base';
 import PermissionsUtil from '../utils/PermissionsUtil';
 import { getContacts } from '../utils/ContactUtils';
+import { AddContactDialog } from './ContactDialog';
 
 import {
   LengthMetrics,
@@ -13,28 +14,25 @@ import {
   ArcButtonStatus,
   ArcButtonStyleMode,
   ArcButtonPosition,
-  display,
+  display
 } from '@kit.ArkUI';
 
 @Entry
 @Component
 struct Index {
   @State heartRate: number = 0;
-  @State status: Resource = $r('app.string.status_no');
+  status: Resource = $r('app.string.status_no');
   @State emergencyContact: string = '';
   @State contactNumber: string = '';
-
   // Heart rate thresholds
   private readonly LOW_THRESHOLD: number = 40;
   private readonly HIGH_THRESHOLD: number = 140;
   private readonly ABNORMAL_DURATION: number = 10000; // 10 seconds
-
   private abnormalStartTime: number = 0;
   private isMonitoring: boolean = false;
   private sensorId: number = -1;
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
   @State selectedContact: string = 'No contact selected';
-
   scroller: Scroller = new Scroller()
   screenW: number = 360;
   screenH: number = 360;
@@ -58,7 +56,7 @@ struct Index {
       fontSize: new LengthMetrics(15, LengthUnit.FP),
       shadowEnabled: true,
       onClick: () => {
-        this.alertDialogShow();
+        this.dialogController?.open()
       }
     })
 
@@ -72,13 +70,7 @@ struct Index {
       width: this.screenW,
       height: this.screenH,
       cornerRadius: 0,
-      backgroundColor: Color.Transparent,
-      shadow: {
-        radius: 0,
-        color: Color.Transparent,
-        offsetX: 0,
-        offsetY: 0
-      }
+      backgroundColor: Color.Transparent
     });
   }
 
@@ -116,7 +108,7 @@ struct Index {
 
           Text( this.status )
             .fontSize(14)
-            .fontColor(this.getStatusColor())
+            .fontColor('#666666')
             .margin({ bottom: 20 })
         }
         .width('100%')
@@ -190,7 +182,7 @@ struct Index {
 
           Button($r('app.string.set_emergency_contact'))
             .onClick(() => {
-              this.alertDialogShow();
+              this.dialogController?.open()
             })
             .width('100%')
             .height(40)
@@ -239,7 +231,6 @@ struct Index {
         .borderRadius(12)
         .margin({ top: 20 })
 
-        // Spacer for better scrolling
         Blank()
           .height(40)
       }
@@ -256,10 +247,6 @@ struct Index {
     .onDisAppear(() => {
       this.stopHeartRateMonitoring();
     })
-  }
-
-  alertDialogShow() {
-    this.dialogController?.open()
   }
 
   private addContact(name: string, phone: string) {
@@ -341,32 +328,19 @@ struct Index {
     console.info(`Initiating emergency call to: ${this.contactNumber}`);
 
     try {
-      // Make the emergency call
       await call.makeCall(this.contactNumber);
       this.status = $r('app.string.status_emergency_call_started' );
-
-      // You might want to add additional emergency features here:
-      // - Send SMS with location
-      // - Notify multiple contacts
-      // - Play emergency sound
 
     } catch (error) {
       console.error('Failed to make emergency call:', error);
       this.status = $r('app.string.status_emergency_call_started' );
-
     }
   }
 
   // Set emergency contact from contacts
   async setEmergencyContact() {
-
     let contacts = await  contact.selectContacts();
-
     try {
-      // Create contact picker intent
-
-      // For wearable devices, you might want to use a simplified contact selection
-      // or pre-configured emergency contacts
       this.pickEmergencyContact();
 
     } catch (error) {
@@ -390,21 +364,13 @@ struct Index {
 
   // Get heart rate color based on value
   getHeartRateColor(): ResourceColor {
-    if (this.heartRate === 0) return '#666666';
-    if (this.heartRate < this.LOW_THRESHOLD || this.heartRate > this.HIGH_THRESHOLD) return '#FF3B30';
+    if (this.heartRate === 0) {return '#666666';}
+    if (this.heartRate < this.LOW_THRESHOLD || this.heartRate > this.HIGH_THRESHOLD) {return '#FF3B30';}
     return '#34C759';
   }
-
-  // Get status color based on current status
-  getStatusColor(): ResourceColor {
-
-    return '#666666';
-  }
-
   // Show contact selection dialog
   showContactSelection(contacts: Array<contact.Contact>) {
     // Create a custom dialog or use system picker if available
-    // This is a simplified example
     if (contacts.length > 0) {
       // For demo, select first contact
       const selected = contacts[0];
@@ -419,7 +385,6 @@ struct Index {
 
     let contacts = await getContacts(this.context)
 
-
     contact.selectContacts({
       isMultiSelect:false
     }, (err: BusinessError, data) => {
@@ -430,39 +395,5 @@ struct Index {
       console.info(`Succeeded in selecting Contacts. data->${JSON.stringify(data)}`);
       this.showContactSelection(data)
     });
-  }
-}
-@CustomDialog
-struct AddContactDialog {
-  controller?: CustomDialogController
-  name: string = ''
-  phone: string = ''
-  onConfirm: (name: string, phone: string) => void = () => {
-  }
-
-  private close() {
-    this.controller?.close()
-  }
-
-  build() {
-    Column({ space: 12 }) {
-      Text('Add Contact')
-        .fontSize(20)
-
-      TextArea({ text: this.name, placeholder: 'Name' })
-        .onChange((val: string) => this.name = val)
-
-      TextArea({ text: this.phone, placeholder: 'Phone' })
-        .onChange((val: string) => this.phone = val)
-
-      Button('Confirm')
-        .onClick(() => {
-          this.onConfirm(this.name.trim(), this.phone.trim())
-          this.close()
-        })
-        .type(ButtonType.Capsule)
-    }
-    .backgroundColor(Color.Black)
-    .padding(16)
   }
 }

@@ -16,8 +16,8 @@ Lifeline is an emergency app that tracks users heart rate.
 
 User can set an emergency contact and let app measure heart rate. Emergency call will trigger if heart rate remains outside normal range (40-140 BPM) for 10 seconds
 
-# Technology
-## Stack
+# Technology 
+## Tech Stack
   - **Languages**: ArkTS, ARKUI
   - **Frameworks**: HarmonyOS SDK 5.1.0(18)
   - **Tools**: DevEco Studio Vers 5.1.0.842
